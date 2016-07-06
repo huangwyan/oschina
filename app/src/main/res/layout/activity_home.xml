@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.expert_oschina.HomeActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/home_rg"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <RadioButton
+                android:id="@+id/home_rb1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/home_rg1_solor"
+                android:button="@null"
+                android:gravity="center"
+                android:checked="true"
+                android:text="综合" />
+
+            <RadioButton
+                android:id="@+id/home_rb2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/home_rg2_solor"
+                android:text="动弹" />
+
+            <RadioButton
+                android:id="@+id/home_rb3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:background="@drawable/home_rg3_solor" />
+
+            <RadioButton
+                android:id="@+id/home_rb4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/home_rg4_solor"
+                android:text="发现" />
+
+            <RadioButton
+                android:id="@+id/home_rb5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/home_rg5_solor"
+                android:text="我的" />
+
+        </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/home_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/home_rg"/>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

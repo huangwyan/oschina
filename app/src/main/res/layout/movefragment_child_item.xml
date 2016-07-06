@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingTop="5dp"
+    android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/mfc_simpledv"
+        fresco:roundAsCircle="true"
+        fresco:placeholderImage="@drawable/place_holder"
+        fresco:placeholderImageScaleType="fitXY"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/mfc_simpledv">
+
+        <TextView
+            android:id="@+id/mfc_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#03fa4d"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/mfc_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mfc_name"
+            android:layout_marginTop="8dp"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/mfc_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mfc_content"
+            android:layout_marginTop="8dp"
+            android:textSize="10dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
