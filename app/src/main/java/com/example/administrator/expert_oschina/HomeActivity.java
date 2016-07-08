@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 import com.example.administrator.expert_oschina.Actvity.SearchActivity;
 import com.example.administrator.expert_oschina.Fragment.FindFragment;
 import com.example.administrator.expert_oschina.Fragment.MFragment;
+import com.example.administrator.expert_oschina.Fragment.MoveFragment;
 import com.example.administrator.expert_oschina.Fragment.MyFragment;
 import com.example.administrator.expert_oschina.Fragment.UndefinedFragment;
 
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     private MFragment mFragment;
     private FindFragment fFragment;
     private MyFragment myFragment;
+    private MoveFragment moveFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,12 +101,20 @@ public class HomeActivity extends AppCompatActivity {
                         ft.commit();
                         break;
                     case R.id.home_rb2:
-                        if (mFragment == null) {
+                       /* if (mFragment == null) {
                             mFragment = new MFragment();
                             ft.add(R.id.home_framelayout, mFragment);
                         } else {
                             ft.show(mFragment);
+                        }*/
+
+                         if (moveFragment == null) {
+                            moveFragment = new MoveFragment();
+                            ft.add(R.id.home_framelayout, moveFragment);
+                        } else {
+                            ft.show(moveFragment);
                         }
+
                         ft.commit();
                         break;
                     case R.id.home_rb3:
@@ -113,20 +123,28 @@ public class HomeActivity extends AppCompatActivity {
                                             .inflate(R.layout.popwindow, null, false);
                             contentView.setBackgroundColor(Color.WHITE);
                             popupWindow.setContentView(contentView);
-                            popupWindow.setHeight(200);
-                            popupWindow.setWidth(400);
+                            int width=getWindowManager().getDefaultDisplay().getWidth();
+                            int hight=getWindowManager().getDefaultDisplay().getHeight()/3;
+                            popupWindow.setHeight(hight);
+                            popupWindow.setWidth(width);
                             popupWindow.setFocusable(true);
                             popupWindow.setOutsideTouchable(true);
-                            popupWindow.showAtLocation(rg_three, Gravity.BOTTOM, 0, 0);
+                            if (!popupWindow.isShowing()) {
+                                popupWindow.showAtLocation(rg_three, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                            }
+                            RadioButton radioButton= (RadioButton) findViewById(R.id.home_rb3);
+                            radioButton.setChecked(false);
                             contentView.setOnTouchListener(new View.OnTouchListener() {
                                 @Override
                                 public boolean onTouch(View v, MotionEvent event) {
                                     if (popupWindow!=null&&popupWindow.isShowing()){
                                         popupWindow.dismiss();
+                                    }else{
+                                        popupWindow.showAtLocation(rg_three, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
                                     }
 
 
-                                    return false;
+                                    return true;
                                 }
                             });
                             break;
@@ -169,6 +187,9 @@ public class HomeActivity extends AppCompatActivity {
         }
         if (myFragment!=null){
             ft.hide(myFragment);
+        }
+        if (moveFragment!=null){
+            ft.hide(moveFragment);
         }
     }
 

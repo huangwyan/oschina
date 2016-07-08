@@ -49,4 +49,15 @@ public class Ask {
     public void setTime(String time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "Ask{" +
+                "title='" + title + '\'' +
+                ", img='" + img + '\'' +
+                ", description='" + description + '\'' +
+                ", id=" + id +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }

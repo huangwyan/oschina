@@ -128,7 +128,7 @@ public class MoveFragment_child extends Fragment {
     private void intiView(View view) {
         mfc_lv= (ListView) view.findViewById(R.id.mf_child_lv);
         askList=new ArrayList<>();
-        mfc_lv.setAdapter(adapter=new MFCAdapter(askList));
+        mfc_lv.setAdapter(adapter=new MFCAdapter());
 
     }
 
@@ -142,20 +142,18 @@ public class MoveFragment_child extends Fragment {
 
     }*/
     class MFCAdapter extends BaseAdapter{
-        private List<Ask> asks;
 
-        public MFCAdapter(List<Ask> asks) {
-            this.asks = asks;
-        }
+
+
 
         @Override
         public int getCount() {
-            return asks.size();
+            return askList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return asks.get(position);
+            return askList.get(position);
         }
 
         @Override
@@ -168,7 +166,7 @@ public class MoveFragment_child extends Fragment {
             ViewHolder viewHolder;
             if (convertView==null){
                 viewHolder=new ViewHolder();
-                convertView=LayoutInflater.from(getContext()).inflate(R.layout.movefragment_child,
+                convertView=LayoutInflater.from(getContext()).inflate(R.layout.movefragment_child_item,
                         null);
                 viewHolder.mfc_name= (TextView) convertView.findViewById(R.id.mfc_name);
                 viewHolder.mfc_content= (TextView) convertView.findViewById(R.id.mfc_content);
@@ -178,14 +176,12 @@ public class MoveFragment_child extends Fragment {
             }else {
                 viewHolder= (ViewHolder) convertView.getTag();
             }
-            if (asks!=null) {
-                //Ask ask = asks.get(position);
-                viewHolder.mfc_name.setText(asks.get(position).getTitle());
-                viewHolder.mfc_content.setText(asks.get(position).getDescription());
-                viewHolder.mfc_time.setText(asks.get(position).getTitle());
-                String url = "http://tnfs.tngou.net/image" + asks.get(position).getImg();
+                Ask ask = askList.get(position);
+                viewHolder.mfc_name.setText("" + ask.getTitle());
+                viewHolder.mfc_content.setText(""+ask.getDescription());
+                viewHolder.mfc_time.setText(""+ask.getTitle());
+                String url = "http://tnfs.tngou.net/image" + ask.getImg();
                 viewHolder.sdv.setImageURI(url);
-            }
             return convertView;
         }
     }

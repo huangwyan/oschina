@@ -1,14 +1,16 @@
 package com.example.administrator.expert_oschina.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.administrator.expert_oschina.Adapter.Home_fragmentAdaper;
 import com.example.administrator.expert_oschina.R;
 import com.example.administrator.expert_oschina.bearn.Top;
 
@@ -18,7 +20,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import Utils.Simple_Okhttp;
@@ -32,7 +33,7 @@ import okhttp3.Response;
  * Created by Administrator on 2016/6/30 0030.
  */
 public class Home_Fragment extends Fragment {
-    // @BindView(R.id.home_fragment_lv)
+
     public ListView homefragment_lv;
     private int id;
     private List<Top> topList;
@@ -40,19 +41,19 @@ public class Home_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.homefragment, container, false);
         id = getArguments().getInt("id");
+        View view = inflater.inflate(R.layout.homefragment, container, false);
         homefragment_lv = (ListView) view.findViewById(R.id.home_fragment_lv);
-        if (savedInstanceState != null) {
+       /* if (savedInstanceState != null) {
             Top[] tops = (Top[]) savedInstanceState.getParcelableArray("cache");
             if (tops != null && tops.length != 0) {
                 List<Top> topList = Arrays.asList(tops);
                 homefragment_lv.setAdapter(new Home_fragmentAdaper(getContext(), topList));
-            } else {
+            } else {*/
                 initData();
                 intiListview();
-            }
-        }
+
+
 
         return view;
     }
@@ -103,7 +104,7 @@ public class Home_Fragment extends Fragment {
         homefragment_lv.setAdapter(new Home_fragmentAdaper(getContext(), topList));
     }
 
-    @Override
+   /* @Override
     public void onSaveInstanceState(Bundle outState) {
         if (topList == null || topList.size() == 0) return;
         Top[] tops = new Top[topList.size()];
@@ -111,5 +112,54 @@ public class Home_Fragment extends Fragment {
         outState.putParcelableArray("cache", tops);
 
 
-    }
+    }*/
+    class Home_fragmentAdaper extends BaseAdapter {
+       private Context context;
+       private List<Top>topList;
+
+       public Home_fragmentAdaper(Context context, List<Top>topList) {
+           this.context = context;
+           this.topList = topList;
+       }
+
+       @Override
+       public int getCount() {
+           return topList.size();
+       }
+
+       @Override
+       public Object getItem(int position) {
+           return topList.get(position);
+       }
+
+       @Override
+       public long getItemId(int position) {
+           return position;
+       }
+
+       @Override
+       public View getView(int position, View convertView, ViewGroup parent) {
+           ViewHolder vh;
+           if (convertView==null){
+               vh=new ViewHolder();
+               convertView= LayoutInflater.from(context).inflate(R.layout.homefragment_list_item,null);
+               vh.home_fragment_title= (TextView) convertView.findViewById(R.id.home_fragment_title);
+               vh.home_fragment_description= (TextView) convertView.findViewById(R.id.home_fragment_description);
+               vh.home_fragment_time= (TextView) convertView.findViewById(R.id.home_fragment_time);
+               vh.home_fragment_content= (TextView) convertView.findViewById(R.id.home_fragment_content);
+               convertView.setTag(vh);
+           }else {
+               vh= (ViewHolder) convertView.getTag();
+           }
+           Top top=this.topList.get(position);
+           vh.home_fragment_title.setText(top.getTitle());
+           vh.home_fragment_description.setText(top.getDescription());
+           vh.home_fragment_time.setText(top.getFromname());
+           vh.home_fragment_content.setText(top.getTopclass());
+           return convertView;
+       }
+       class ViewHolder{
+           TextView home_fragment_title,home_fragment_description,home_fragment_time,home_fragment_content;
+       }
+   }
 }
